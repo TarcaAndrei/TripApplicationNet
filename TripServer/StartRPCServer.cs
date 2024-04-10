@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Net.Mime;
 using TripNetworking.Utils;
 using TripPersistence;
 using TripService;

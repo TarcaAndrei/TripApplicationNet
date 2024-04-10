@@ -29,8 +29,7 @@ namespace TripServer
             this._repositoryRezervare = repositoryRezervare;
             _loggedClients = new Dictionary<string, ITripObserver>();
         }
-
-        //make it thread safe
+        
         
         public Optional<Utilizator> LoginUser(string username, string password, ITripObserver client)
         {
