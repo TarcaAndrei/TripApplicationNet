@@ -27,6 +27,17 @@ namespace TripClient
             InitializeComponent();
         }
 
+        public void Mor(MainApplication copkil)
+        {
+            // copkil.Close();
+            BeginInvoke((MethodInvoker)delegate
+            {
+                Application.Exit();
+            });
+            // Application.Exit();
+            // this.Show();
+        }
+
 
         private void buttonRegister_Click(object sender, EventArgs e)
         {

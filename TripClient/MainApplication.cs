@@ -29,7 +29,7 @@ namespace TripClient
             LoadMainGridView();
             LoadSecondGridView();
             LoadComboBoxes();
-            this.Closed += (sender, args) => LogOutUser();
+            this.Closing += (sender, args) => LogOutUser();
         }
         
         private void LogOutUser()
@@ -39,9 +39,11 @@ namespace TripClient
             try
             {
                 _serviceApplication.LogOut(_utilizator.Username);
+                Environment.Exit(0);
+                // this.parent.Mor(this);
                 // this.Close();
                 // parent.Close();
-                Application.Exit();
+                // Application.Exit();
             }
             catch (Exception e)
             {
