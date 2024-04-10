@@ -45,6 +45,10 @@ namespace TripServer
                     {
                         throw new AppException("Parola incorecta");
                     }
+                    else if (_loggedClients.ContainsKey(username))
+                    {
+                        throw new AppException("Utilizator logat deja");
+                    }
                     else
                     {
                         _loggedClients[username] = client;
