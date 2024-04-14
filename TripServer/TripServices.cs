@@ -113,6 +113,7 @@ namespace TripServer
             Console.WriteLine("Notifying all clients ...");
             foreach (var client in _loggedClients.Values)
             {
+                // client.ReservationUpdate();
                 Task.Run(() => client.ReservationUpdate());
             }
         }

@@ -41,9 +41,9 @@ namespace TripClient
 
         private void buttonRegister_Click(object sender, EventArgs e)
         {
-            this.loginPanel.Visible = false;
-            this.registerPanel.Visible = true;
-            this.ClearFields();
+            // this.loginPanel.Visible = false;
+            // this.registerPanel.Visible = true;
+            // this.ClearFields();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace TripClient
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Eroare", ex.Message);
+                MessageBox.Show(ex.Message, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if(userStage != null)
                     userStage.Close();
                 // MessageAlert.showMessage(null, Alert.AlertType.ERROR, "Eroare", e.getMessage());
@@ -77,7 +77,7 @@ namespace TripClient
             {
                 if (userStage != null)
                     userStage.Close();
-                MessageBox.Show("Eroare", "Nu exista userul");
+                MessageBox.Show("Nu exista userul", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             userStage.SetUtilizator(clientOpt.Value);

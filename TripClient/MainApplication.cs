@@ -40,10 +40,6 @@ namespace TripClient
             {
                 _serviceApplication.LogOut(_utilizator.Username);
                 Environment.Exit(0);
-                // this.parent.Mor(this);
-                // this.Close();
-                // parent.Close();
-                // Application.Exit();
             }
             catch (Exception e)
             {
@@ -236,7 +232,6 @@ namespace TripClient
 
         public new void Update()
         {
-            Console.WriteLine("Merge update-ul?????");
             if (InvokeRequired)
             {
                 BeginInvoke((MethodInvoker)delegate

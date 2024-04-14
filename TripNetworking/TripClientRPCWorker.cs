@@ -79,15 +79,18 @@ namespace TripNetworking
         
         private void SendResponse(Response response)
         {
-            try
+            lock (stream)
             {
-                Console.WriteLine($"Send response ... {response}");
-                formatter.Serialize(stream, response);
-                stream.Flush();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
+                try
+                {
+                    Console.WriteLine($"Send response ... {response}");
+                    formatter.Serialize(stream, response);
+                    stream.Flush();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
         

@@ -27,7 +27,7 @@ namespace TripNetworking
         {
             this.host = host;
             this.port = port;
-            formatter = new BinaryFormatter();
+            // formatter = new BinaryFormatter();
             queueResponses = new BlockingCollection<Response>();
         }
 
@@ -61,7 +61,10 @@ namespace TripNetworking
                 {
                     if (stream.CanRead && stream.DataAvailable)
                     {
+                        // Console.WriteLine(stream);
                         // object raspuns = formatter.Deserialize(stream);
+                        // stream.Flush();
+                        // stream.Position = 0L;
                         Response response = (Response)formatter.Deserialize(stream);
                         Console.WriteLine("Response received " + response);
                         if (IsUpdate(response))
@@ -157,14 +160,17 @@ namespace TripNetworking
         
         private void SendRequest(Request request)
         {
-            try
+            lock (stream)
             {
-                formatter.Serialize(stream, request);
-                stream.Flush();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
+                try
+                {
+                    formatter.Serialize(stream, request);
+                    stream.Flush();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
