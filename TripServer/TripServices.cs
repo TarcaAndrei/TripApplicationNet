@@ -70,30 +70,36 @@ namespace TripServer
 
         public List<ExcursieDTO> GetAllExcursii()
         {
-            return _repositoryExcursie
-                .FindAll()
-                .Select(excursie => new ExcursieDTO(
-                    excursie.Id,
-                    excursie.ObiectivTuristic,
-                    excursie.FirmaTransport.Nume,
-                    excursie.OraPlecarii,
-                    excursie.Pret,
-                    excursie.NumarLocuriTotale - _repositoryRezervare.GetNumarOcupate(excursie.Id)))
-                .ToList();
+            lock(_repositoryExcursie){
+                return _repositoryExcursie
+                    .FindAll()
+                    .Select(excursie => new ExcursieDTO(
+                        excursie.Id,
+                        excursie.ObiectivTuristic,
+                        excursie.FirmaTransport.Nume,
+                        excursie.OraPlecarii,
+                        excursie.Pret,
+                        excursie.NumarLocuriTotale - _repositoryRezervare.GetNumarOcupate(excursie.Id)))
+                    .ToList();
+
+            }
         }
 
         public List<ExcursieDTO> GetExcursiiByFilter(string obiectiv, TimeSpan deLa, TimeSpan panaLa)
         {
-            return _repositoryExcursie
-                .FindExcursieByFilter(obiectiv, deLa, panaLa)
-                .Select(excursie => new ExcursieDTO(
-                    excursie.Id,
-                    excursie.ObiectivTuristic,
-                    excursie.FirmaTransport.Nume,
-                    excursie.OraPlecarii,
-                    excursie.Pret,
-                    excursie.NumarLocuriTotale - _repositoryRezervare.GetNumarOcupate(excursie.Id)))
-                .ToList();
+            lock (_repositoryExcursie)
+            {
+                return _repositoryExcursie
+                    .FindExcursieByFilter(obiectiv, deLa, panaLa)
+                    .Select(excursie => new ExcursieDTO(
+                        excursie.Id,
+                        excursie.ObiectivTuristic,
+                        excursie.FirmaTransport.Nume,
+                        excursie.OraPlecarii,
+                        excursie.Pret,
+                        excursie.NumarLocuriTotale - _repositoryRezervare.GetNumarOcupate(excursie.Id)))
+                    .ToList();
+            }
         }
 
         public void RezervaBilete(int idExcursie, string numeClient, string telefonClient, int numarBilete)

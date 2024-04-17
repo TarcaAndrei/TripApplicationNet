@@ -36,7 +36,8 @@ namespace TripServer
             IRepositoryRezervare repositoryRezervare = new RepositoryRezervare(db, repositoryExcursie);
             ITripServices serverServices = new TripServices(repositoryUtilizator, repositoryFirmaTransport,
                 repositoryExcursie, repositoryRezervare);
-            AbstractServer server = new RPCConcurrentServer(serverCitit, portCitit, serverServices);
+            // AbstractServer server = new RPCConcurrentServer(serverCitit, portCitit, serverServices);
+            AbstractServer server = new RPCConcurrentServerProto(serverCitit, portCitit, serverServices);
             Console.WriteLine("Server started ... on port: " + portCitit);
             try
             {
